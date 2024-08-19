@@ -14,7 +14,6 @@ fn main() {
 
 fn r_gen() -> u32{
     // Saw this being talked about on reddit so I wrote it in rust   
-
     let z = 0;
     let x = 1;
     let a = 1;
@@ -23,26 +22,36 @@ fn r_gen() -> u32{
     let d = 7;
     let e = 10;
     let f = 15;
-    let mut i = rand::thread_rng().gen_range(x..=a);
-    let mut y = rand::thread_rng().gen_range(b..=d);
 
+    let mut i = rand::thread_rng()
+        .gen_range(x..=a);
+    let mut y = rand::thread_rng()
+        .gen_range(b..=d);
 
-    let mut r = rand::thread_rng().gen_range(z..=e);
+    let mut r = rand::thread_rng()
+        .gen_range(z..=e);
     match r {
         1..=50 => {
-            r = rand::thread_rng().gen_range(i..=y);
+            r = rand::thread_rng()
+                .gen_range(i..=y);
             return r;
         }
         51..=100 => {
-            i = rand::thread_rng().gen_range(c..=e);
-            y = rand::thread_rng().gen_range(z..=f);
-            r = rand::thread_rng().gen_range(i..=y);
+            i = rand::thread_rng()
+                .gen_range(c..=e);
+            y = rand::thread_rng()
+                .gen_range(z..=f);
+            r = rand::thread_rng()
+                .gen_range(i..=y);
             return r;
         }
         _ => {
-            i = rand::thread_rng().gen_range(c..=f);
-            y = rand::thread_rng().gen_range(e..=f);
-            r = rand::thread_rng().gen_range(i..=y);
+            i = rand::thread_rng()
+                .gen_range(c..=f);
+            y = rand::thread_rng()
+                .gen_range(e..=f);
+            r = rand::thread_rng()
+                .gen_range(i..=y);
             return r;
         }
     };
