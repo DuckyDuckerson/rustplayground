@@ -10,8 +10,6 @@ fn main() {
 }
 
 
-
-
 fn guessing_game(){
     let secret_number = rand::thread_rng().gen_range(1..=10);
 
