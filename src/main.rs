@@ -31,12 +31,12 @@ fn r_gen() -> u32{
     let mut r = rand::thread_rng()
         .gen_range(z..=e);
     match r {
-        1..=50 => {
+        1..=5 => {
             r = rand::thread_rng()
                 .gen_range(i..=y);
             return r;
         }
-        51..=100 => {
+        6..=10 => {
             i = rand::thread_rng()
                 .gen_range(c..=e);
             y = rand::thread_rng()
@@ -74,6 +74,9 @@ fn guessing_game(secret_number: u32){
         let guess: u32 = match guess.trim().parse() {
             Ok(num) => num,
             Err(_) => {
+                tries += 1;
+                println!("Please enter a number!");
+                println!("{}/3 tries left", tries);
                 continue;
             }
         };
@@ -82,10 +85,13 @@ fn guessing_game(secret_number: u32){
             Ordering::Less => {
                 println!("Too small!");
                 tries += 1;
+                println!("{}/3 tries left", tries);
+
             }
             Ordering::Greater => {
                     println!("Too big!");
                     tries += 1;
+                    println!("{}/3 tries left", tries);
             }
             Ordering::Equal => {
                     println!("You win!");
