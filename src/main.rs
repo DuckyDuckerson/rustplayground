@@ -67,18 +67,6 @@ fn fralse() {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 struct Number {
     odd: bool,
     value: i32,
