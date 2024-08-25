@@ -4,15 +4,16 @@ use std::cmp::Ordering;
 use std::thread;
 
 
-fn main() {
-    let p_time = 50;
+const P_TIME: u64 = 50;
 
-    typewriter_r("Guessing Game", p_time);
-    typewriter_l("Hello! Welcome to the guessing game!", p_time);
+
+fn main() {
+    let secret_number = r_gen();
+
+    typewriter_r("Guessing Game\n", P_TIME);
+    typewriter_l("Hello! Welcome to the guessing game!", P_TIME);
 
     fralse();
-
-    let secret_number = r_gen();
 
     guessing_game(secret_number);
     // -------------------------
@@ -35,7 +36,7 @@ fn typewriter_r(text: &str, time: u64) {
 
         typewriter_r(text.as_str(), time);
     } else {
-        println!();
+        print!("");
     }
 }
 
@@ -52,6 +53,7 @@ fn typewriter_l (text: &str, time: u64){
 
 
 fn fralse() {
+
     let minus_two = Number {
         odd: false,
         value: -2,
@@ -94,6 +96,7 @@ fn r_gen() -> u32{
     let mut y = rand::thread_rng()
         .gen_range(b..=d);
 
+
     let mut r = rand::thread_rng()
         .gen_range(z..=e);
     match r {
@@ -129,11 +132,10 @@ fn guessing_game(secret_number: u32){
     let mut tries = 0;
 
     while tries < 3{
-        println!("Guess the number! Between 1 and 15.");
-        println!("Please input your guess.");
+        typewriter_r("Guess the number! Between 1 and 15.\n", P_TIME);
+        typewriter_r("~> ", P_TIME);
         
         let mut guess = String::new();
-        print!("You guessed: {}", guess);
         io::stdin()
             .read_line(&mut guess)
             .expect("Failed to read line");
@@ -141,27 +143,28 @@ fn guessing_game(secret_number: u32){
             Ok(num) => num,
             Err(_) => {
                 tries += 1;
-                println!("Please enter a number!");
+                println!("Please enter a number!, {}", guess);
                 println!("{}/3 tries left", tries);
                 continue;
             }
         };
 
+        println!("You guessed: {}", guess);
         match guess.cmp(&secret_number) {
             Ordering::Less => {
-                println!("Too small!");
+                typewriter_r("Too small!", P_TIME);
                 tries += 1;
                 println!("{}/3 tries left", tries);
 
             }
             Ordering::Greater => {
-                    println!("Too big!");
-                    tries += 1;
-                    println!("{}/3 tries left", tries);
+                typewriter_r("Too big!", P_TIME);
+                tries += 1;
+                println!("{}/3 tries left", tries);
             }
             Ordering::Equal => {
-                    println!("You win!");
-                    break;
+                typewriter_r("You win!", P_TIME);
+                break;
             }
         }
     }
