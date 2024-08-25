@@ -1,14 +1,92 @@
-use std::io;
+use std::{io::{self, Write}, time::Duration};
 use rand::Rng;
 use std::cmp::Ordering;
+use std::thread;
 
 
 fn main() {
+    let p_time = 50;
+
+    typewriter_r("Guessing Game", p_time);
+    typewriter_l("Hello! Welcome to the guessing game!", p_time);
+
+    fralse();
+
     let secret_number = r_gen();
 
     guessing_game(secret_number);
     // -------------------------
     println!("Goodbye!");
+}
+
+
+// --------------------------------------------
+
+fn typewriter_r(text: &str, time: u64) {
+
+    let mut text = text.chars();
+
+    if let Some(first) = text.next() {
+
+        print!("{}", first);
+        io::stdout().flush().unwrap();
+
+        thread::sleep(Duration::from_millis(time));
+
+        typewriter_r(text.as_str(), time);
+    } else {
+        println!();
+    }
+}
+
+
+fn typewriter_l (text: &str, time: u64){
+
+    for c in text.chars(){
+        print!("{}", c);
+        io::stdout().flush().unwrap();
+        thread::sleep(Duration::from_millis(time));
+    }
+    println!();
+}
+
+
+fn fralse() {
+    let minus_two = Number {
+        odd: false,
+        value: -2,
+    };
+    
+    let n = Number {
+        odd: true,
+        value: 17,
+    };
+    
+    println!("{}, {}", minus_two.is_positive(), n.is_positive());
+    println!("{}", minus_two.odd);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+struct Number {
+    odd: bool,
+    value: i32,
+}
+impl Number {
+    fn is_positive(&self) -> bool {
+        self.value > 0
+    }
 }
 
 
@@ -67,7 +145,7 @@ fn guessing_game(secret_number: u32){
         println!("Please input your guess.");
         
         let mut guess = String::new();
-        println!("You guessed: {}", guess);
+        print!("You guessed: {}", guess);
         io::stdin()
             .read_line(&mut guess)
             .expect("Failed to read line");
