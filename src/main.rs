@@ -8,6 +8,13 @@ const P_TIME: u64 = 50;
 
 
 fn main() {
+    // super large unsorted array to test sorting algorithms
+    let unsorted = vec![1, 5, 3, 2, 4, 6, 8, 7, 9, 10, 15, 13, 12, 11, 14];
+
+    insertion_sort(unsorted.clone());
+    merge_sort(unsorted.clone());
+    quick_sort(unsorted.clone());
+
     let secret_number = r_gen();
 
     typewriter_r("Guessing Game\n", P_TIME);
@@ -81,7 +88,7 @@ impl Number {
 
 
 fn r_gen() -> u32{
-    // Saw this being talked about on reddit so I wrote it in rust   
+    // Saw this being talked about on reddit so I wrote it in rust
     let z = 0;
     let x = 1;
     let a = 1;
