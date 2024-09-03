@@ -28,7 +28,6 @@ fn main() {
 
 
 // --------------------------------------------
-
 fn insertion_sort(mut array: Vec<i32>) -> Vec<i32> {
     for i in 1..array.len() {
         let mut j = i;
