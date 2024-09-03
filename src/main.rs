@@ -12,7 +12,6 @@ fn main() {
     let unsorted = vec![1, 5, 3, 2, 4, 6, 8, 7, 9, 10, 15, 13, 12, 11, 14];
 
     insertion_sort(unsorted.clone());
-    merge_sort(unsorted.clone());
     quick_sort(unsorted.clone());
 
     let secret_number = r_gen();
@@ -29,6 +28,43 @@ fn main() {
 
 
 // --------------------------------------------
+
+fn insertion_sort(mut array: Vec<i32>) -> Vec<i32> {
+    for i in 1..array.len() {
+        let mut j = i;
+        while j > 0 && array[j] < array[j - 1] {
+            array.swap(j, j - 1);
+            j -= 1;
+        }
+    }
+    array
+}
+
+
+fn quick_sort(mut array: Vec<i32>) -> Vec<i32> {
+    if array.len() <= 1 {
+        return array;
+    }
+
+    let pivot = array.remove(0);
+    let mut less = Vec::new();
+    let mut greater = Vec::new();
+
+    for x in array {
+        if x <= pivot {
+            less.push(x);
+        } else {
+            greater.push(x);
+        }
+    }
+
+    let mut sorted = quick_sort(less);
+    sorted.push(pivot);
+    sorted.append(&mut quick_sort(greater));
+    sorted
+}
+
+
 
 fn typewriter_r(text: &str, time: u64) {
 
@@ -102,7 +138,6 @@ fn r_gen() -> u32{
         .gen_range(x..=a);
     let mut y = rand::thread_rng()
         .gen_range(b..=d);
-
 
     let mut r = rand::thread_rng()
         .gen_range(z..=e);
